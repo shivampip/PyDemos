@@ -31,8 +31,8 @@ async def get_raddit_top(subreddit, client):
 
 def signal_handler(sig, frame):
     print("\nSTOPPING\n")
-    #loop.stop()
-    #client.close()
+    loop.stop()
+    client.close()
     sys.exit(0)
 
 
