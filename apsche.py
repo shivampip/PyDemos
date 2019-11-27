@@ -8,7 +8,7 @@ scheduler = BackgroundScheduler()
 
 
 def tick():
-    scheduler.print_jobs()
+    scheduler.print_jobs()                     
     print('Tick! The time is: %s' % datetime.now())
 
 
@@ -20,11 +20,13 @@ if(__name__ == '__main__'):
     
     print("adding jobs")
     #scheduler.add_job(tick, 'interval', seconds=3)
-    scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 3))
-    scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 4))
-    scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 6))
-    print("jobs added")
-
+    j1= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 3))
+    j2= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 4))
+    j3= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 6))
+    print(j1.id) 
+    scheduler.remove_job(j1.id)
+    scheduler.remove_job(j3.id) 
+    
     #print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
     try:
