@@ -22,17 +22,31 @@ def my_listener(event):
         print(f'{event.job_id} The job worked :)')
 
 
+def circle():
+    print("Circling.....")
+    j1= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 3), kwargs= {"text": "Hello World 1"})
+    j2= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 4), kwargs= {"text": "Hello World 2"})
+    print("Two jobs added")
+
+
+
 if(__name__ == '__main__'):
     scheduler.start()
     scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
+
+    
     
     print("adding jobs")
+
+    scheduler.add_job(circle, "interval", minutes= 1)
+
+
     #scheduler.add_job(tick, 'interval', seconds=3)
-    j1= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 3), kwargs= {"text": "Hello World 1"})
-    j2= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 4), kwargs= {"text": "Hello World 2"})
-    j3= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 6), kwargs= {"text": "Hello World 3"})
+    #j1= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 3), kwargs= {"text": "Hello World 1"})
+    #j2= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 4), kwargs= {"text": "Hello World 2"})
+    #j3= scheduler.add_job(tick, "date", next_run_time= datetime.now()+ timedelta(seconds= 6), kwargs= {"text": "Hello World 3"})
     #print(j1.id) 
-    scheduler.remove_job(j1.id)
+    #scheduler.remove_job(j1.id)
     #scheduler.remove_job(j3.id) 
     
     #scheduler.print_jobs()                     
